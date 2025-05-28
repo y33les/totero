@@ -3,18 +3,21 @@ PDFVIEWER := okular
 all: build pub
 
 # TODO: Option to weave to HTML instead of XeTeX
+# TODO: Option to publish ebook or print book (assume ebook for now)
 
 tex:
 	mkdir -p doc
+	noweave -delay hello.nw > doc/hello.tex
 	noweave -delay totero.nw > doc/totero.tex
 
 code:
 	mkdir -p src
+	notangle -Rhello.m hello.nw > src/hello.m
 	notangle -Rtotero.m totero.nw > src/totero.m
 
 pub: tex
-	cd doc && xelatex totero
-	cd doc && xelatex totero
+	cd doc && pdflatex totero
+	cd doc && pdflatex totero
 view: pub
 	cd doc && $(PDFVIEWER) totero.pdf
 

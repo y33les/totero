@@ -1,41 +1,79 @@
-\documentclass{article}
+% memoir template adapted from https://tex.stackexchange.com/a/70884
+%\documentclass[12pt, twoside, openright]{memoir} % print book
+\documentclass[10pt, ebook, openany]{memoir} % ebook
+%\usepackage[paperwidth=4.25in, paperheight=6.875in,bindingoffset=.75in]{geometry}
+%\usepackage[protrusion=true,expansion=true]{microtype}
 
+%\usepackage{tgheros,tgtermes,tgcursor}
+%\usepackage{tgbonum}
+%\usepackage{tgpagella}
+\usepackage{tgschola}
+
+%\usepackage{tgtermes}
 \usepackage{../noweb}
 
-\title{Hello World in Mercury}
+\makeatletter
+\def\maketitle{%
+  \null
+  \thispagestyle{empty}%
+  \vfill
+  \begin{center}\leavevmode
+    \normalfont
+    {\LARGE\raggedleft \@author\par}%
+    \hrulefill\par
+    {\huge\raggedright \@title\par}%
+    \vskip 1cm
+%    {\Large \@date\par}%
+  \end{center}%
+  \vfill
+  \null
+  \cleardoublepage
+  }
+\makeatother
+\title{Totero: a literate CHIP-8 emulator in Mercury}
 \author{Phil Yeeles}
 \date{\today}
 
 \begin{document}
 
+\let\cleardoublepage\clearpage
+
 \maketitle
 
-Here is the module declaration.
+\frontmatter
 
-<<module>>=
+\null\vfill
+
+\begin{flushleft}
+\textit{Totero: a literate CHIP-8 emulator in Mercury}  © 2025 by Phil Yeeles is licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International. To view a copy of this license, visit https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+
+\end{flushleft}
+\let\cleardoublepage\clearpage
+
+\mainmatter
+\sloppy
+
+\chapter{Introduction}
+
+This is the introduction.
+
+\include{hello.tex} % Include the 'hello' section/chapter
+
+\chapter{The final product}
+
+This is where we import \texttt{hello} and use it.
+
+<<totero.m>>=
 :- module totero.
-@
-And here is the interface.
-
-<<interface>>=
 :- interface.
 :- import_module io.
 :- pred main(io::di, io::uo) is det.
-@
-Finally, here is the implementation.
-
-<<implementation>>=
 :- implementation.
-main(IOState_in, IOState_out) :-
-    io.write_string("Hello, world!\n", IOState_in, IOState_out).
+:- import_module hello.
+main(!IO) :-
+    hello.greet(!IO).
 @
-And now we tie it all up in \verb¬hello.m¬.
-
-<<totero.m>>=
-<<module>>
-<<interface>>
-<<implementation>>
-@
-And that's it!
+That's it.  That's the end.
 
 \end{document}
