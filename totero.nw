@@ -1,0 +1,41 @@
+\documentclass{article}
+
+\usepackage{../noweb}
+
+\title{Hello World in Mercury}
+\author{Phil Yeeles}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+Here is the module declaration.
+
+<<module>>=
+:- module totero.
+@
+And here is the interface.
+
+<<interface>>=
+:- interface.
+:- import_module io.
+:- pred main(io::di, io::uo) is det.
+@
+Finally, here is the implementation.
+
+<<implementation>>=
+:- implementation.
+main(IOState_in, IOState_out) :-
+    io.write_string("Hello, world!\n", IOState_in, IOState_out).
+@
+And now we tie it all up in \verb¬hello.m¬.
+
+<<totero.m>>=
+<<module>>
+<<interface>>
+<<implementation>>
+@
+And that's it!
+
+\end{document}
