@@ -4,13 +4,16 @@
 %\usepackage[paperwidth=4.25in, paperheight=6.875in,bindingoffset=.75in]{geometry}
 %\usepackage[protrusion=true,expansion=true]{microtype}
 
-%\usepackage{tgheros,tgtermes,tgcursor}
-%\usepackage{tgbonum}
-%\usepackage{tgpagella}
 \usepackage{tgschola}
-
-%\usepackage{tgtermes}
 \usepackage{../noweb}
+
+%% Relax noweb's not-breaking-chunks behaviour
+%\def\nwendcode{\endtrivlist \endgroup \vfil\penalty10\vfilneg}
+%\let\nwdocspar=\smallbreak
+
+%% Relax it even further if necessary
+%\def\nwendcode{\endtrivlist \endgroup}
+%\let\nwdocspar=\par
 
 \makeatletter
 \def\maketitle{%
@@ -36,6 +39,8 @@
 
 \begin{document}
 
+@
+
 \let\cleardoublepage\clearpage
 
 \maketitle
@@ -53,12 +58,16 @@
 
 \mainmatter
 \sloppy
+\tableofcontents
+\clearpage
+\listoffigures
+\clearpage
 
 \chapter{Introduction}
 
-This is the introduction.
+This is the introduction.  % TODO: write it, include introduction to chip8 and mercury
 
-\include{hello.tex} % Include the 'hello' section/chapter
+\input{hello.tex} % Include the 'hello' section/chapter
 
 \chapter{The final product}
 
@@ -75,5 +84,9 @@ main(!IO) :-
     hello.greet(!IO).
 @
 That's it.  That's the end.
+
+% TODO: Create noweb chunk index
+
+@
 
 \end{document}
