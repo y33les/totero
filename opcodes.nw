@@ -1,0 +1,27 @@
+\chapter{CHIP-8 opcodes}
+
+In this chapter, we will build a module implementing the 35 opcodes of
+the CHIP-8 system.
+
+CHIP-8 is a \textbf{big-endian} system, meaning that the most
+significant byte of value is stored earliest in memory.
+
+\begin{figure}[h]
+\centering
+\begin{tabulary}{\textwidth}{r|c|c|c|c|}
+\multicolumn{1}{r}{Address}&
+\multicolumn{1}{c}{$a$}&
+\multicolumn{1}{c}{$a+1$}&
+\multicolumn{1}{c}{$a+2$}&
+\multicolumn{1}{c}{$a+3$}\\\cline{2-5}
+\textbf{Big-endian}&0xAA&0xBB&0xCC&0xDD\\\cline{2-5}
+\textbf{Little-endian}&0xDD&0xCC&0xBB&0xAA\\\cline{2-5}
+\end{tabulary}
+\caption{Big- \textit{versus} little-endian representation of the
+integer 0xAABBCCDD}
+\end{figure}
+
+<<opcodes.m>>=
+true.
+@
+

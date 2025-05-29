@@ -7,11 +7,13 @@ all: build pub
 
 tex:
 	mkdir -p doc
+	noweave -delay opcodes.nw > doc/opcodes.tex
 	noweave -delay hello.nw > doc/hello.tex
 	noweave -delay totero.nw > doc/totero.tex
 
 code:
 	mkdir -p src
+	notangle -Ropcodes.m opcodes.nw > src/opcodes.m
 	notangle -Rhello.m hello.nw > src/hello.m
 	notangle -Rtotero.m totero.nw > src/totero.m
 

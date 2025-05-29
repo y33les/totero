@@ -1,11 +1,14 @@
 % memoir template adapted from https://tex.stackexchange.com/a/70884
 %\documentclass[12pt, twoside, openright]{memoir} % print book
 \documentclass[10pt, ebook, openany]{memoir} % ebook
-%\usepackage[paperwidth=4.25in, paperheight=6.875in,bindingoffset=.75in]{geometry}
-%\usepackage[protrusion=true,expansion=true]{microtype}
-
+\usepackage[T1]{fontenc}
+\usepackage{tabulary}
 \usepackage{tgschola}
 \usepackage{../noweb}
+
+% parskip is not allowed in memoir
+\nonzeroparskip
+\setlength{\parindent}{0pt}
 
 %% Relax noweb's not-breaking-chunks behaviour
 %\def\nwendcode{\endtrivlist \endgroup \vfil\penalty10\vfilneg}
@@ -62,12 +65,15 @@
 \clearpage
 \listoffigures
 \clearpage
+\listoftables
+\clearpage
 
 \chapter{Introduction}
 
 This is the introduction.  % TODO: write it, include introduction to chip8 and mercury
 
-\input{hello.tex} % Include the 'hello' section/chapter
+\input{opcodes.tex}
+\input{hello.tex}
 
 \chapter{The final product}
 
