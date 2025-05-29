@@ -1,0 +1,20 @@
+\chapter{CHIP-8 system resources}
+
+In this chapter, we will build a module implementing the registers,
+memory and stack of our CHIP-8 system.
+
+<<Declaration of register type>>=
+:- type register == uint8.
+@
+
+<<system.m>>=
+:- module system.
+:- interface.
+:- import_module uint8.
+<<Declaration of TODO>>
+
+:- implementation.
+<<Declaration of register type>>
+<<Implementation of TODO>>
+@
+

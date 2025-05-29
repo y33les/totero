@@ -3,25 +3,120 @@
 In this chapter, we will build a module implementing the 35 opcodes of
 the CHIP-8 system.
 
-CHIP-8 is a \textbf{big-endian} system, meaning that the most
-significant byte of value is stored earliest in memory.
-
-\begin{figure}[h]
+\begin{figure}[b]
 \centering
-\begin{tabulary}{\textwidth}{r|c|c|c|c|}
+\begin{tabular}{r|c|c|c|c|}
 \multicolumn{1}{r}{Address}&
 \multicolumn{1}{c}{$a$}&
 \multicolumn{1}{c}{$a+1$}&
 \multicolumn{1}{c}{$a+2$}&
 \multicolumn{1}{c}{$a+3$}\\\cline{2-5}
-\textbf{Big-endian}&0xAA&0xBB&0xCC&0xDD\\\cline{2-5}
-\textbf{Little-endian}&0xDD&0xCC&0xBB&0xAA\\\cline{2-5}
-\end{tabulary}
+\textbf{Big-endian}&$AA_{16}$&$BB_{16}$&$CC_{16}$&$DD_{16}$\\\cline{2-5}
+\textbf{Little-endian}&$DD_{16}$&$CC_{16}$&$BB_{16}$&$AA_{16}$\\\cline{2-5}
+\end{tabular}
 \caption{Big- \textit{versus} little-endian representation of the
-integer 0xAABBCCDD}
+integer $AABBCCDD_{16}$}
+\label{fig:endianness}
 \end{figure}
 
+CHIP-8 is a \textbf{big-endian} system, meaning that the most
+significant byte of value is stored earliest in memory (see Figure
+\ref{fig:endianness}).  This is important because CHIP-8's opcodes all
+consist of two bytes; we need to read the in the correct order,
+otherwise we will be executing something completely unexpected!
+
+We will use the following conventions when describing each opcode\footnote{\label{fn:opcodewiki}This schema is lifted from
+Wikipedia's article on CHIP-8,
+\url{https://en.wikipedia.org/w/index.php?title=CHIP-8&oldid=1290766504}}:
+
+\begin{itemize}
+\item \texttt{NNN}: 12-bit address
+\item \texttt{NN}: 8-bit constant
+\item \texttt{N}: 4-bit constant
+\item \texttt{X}: 4-bit register identifier
+\item \texttt{Y}: 4-bit register identifier
+\item \texttt{PC}: program counter
+\item \texttt{I}: 12-bit register (for memory address)
+\item \texttt{VN}: one of the 16 available variables, where \texttt{N}
+can range from $0_{16}$ to $F_{16}$
+\end{itemize}
+
 <<opcodes.m>>=
-true.
+:- module opcodes.
+:- interface.
+:- import_module io.
+<<Declaration of op0NNN>>
+<<Declaration of op00E0>>
+<<Declaration of op00EE>>
+<<Declaration of op1NNN>>
+<<Declaration of op2NNN>>
+<<Declaration of op3XNN>>
+<<Declaration of op4XNN>>
+<<Declaration of op5XY0>>
+<<Declaration of op6XNN>>
+<<Declaration of op7XNN>>
+<<Declaration of op8XY0>>
+<<Declaration of op8XY1>>
+<<Declaration of op8XY2>>
+<<Declaration of op8XY3>>
+<<Declaration of op8XY4>>
+<<Declaration of op8XY5>>
+<<Declaration of op8XY6>>
+<<Declaration of op8XY7>>
+<<Declaration of op8XYE>>
+<<Declaration of op9XY0>>
+<<Declaration of opANNN>>
+<<Declaration of opBNNN>>
+<<Declaration of opCXNN>>
+<<Declaration of opDXYN>>
+<<Declaration of opEX9E>>
+<<Declaration of opEXA1>>
+<<Declaration of opFX07>>
+<<Declaration of opFX01>>
+<<Declaration of opFX15>>
+<<Declaration of opFX18>>
+<<Declaration of opFX1E>>
+<<Declaration of opFX29>>
+<<Declaration of opFX33>>
+<<Declaration of opFX55>>
+<<Declaration of opFX65>>
+
+:- implementation.
+:- import_module int,string, char, list.
+<<Implementation of op0NNN>>
+<<Implementation of op00E0>>
+<<Implementation of op00EE>>
+<<Implementation of op1NNN>>
+<<Implementation of op2NNN>>
+<<Implementation of op3XNN>>
+<<Implementation of op4XNN>>
+<<Implementation of op5XY0>>
+<<Implementation of op6XNN>>
+<<Implementation of op7XNN>>
+<<Implementation of op8XY0>>
+<<Implementation of op8XY1>>
+<<Implementation of op8XY2>>
+<<Implementation of op8XY3>>
+<<Implementation of op8XY4>>
+<<Implementation of op8XY5>>
+<<Implementation of op8XY6>>
+<<Implementation of op8XY7>>
+<<Implementation of op8XYE>>
+<<Implementation of op9XY0>>
+<<Implementation of opANNN>>
+<<Implementation of opBNNN>>
+<<Implementation of opCXNN>>
+<<Implementation of opDXYN>>
+<<Implementation of opEX9E>>
+<<Implementation of opEXA1>>
+<<Implementation of opFX07>>
+<<Implementation of opFX01>>
+<<Implementation of opFX15>>
+<<Implementation of opFX18>>
+<<Implementation of opFX1E>>
+<<Implementation of opFX29>>
+<<Implementation of opFX33>>
+<<Implementation of opFX55>>
+<<Implementation of opFX65>>
 @
 

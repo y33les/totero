@@ -1,8 +1,17 @@
 % memoir template adapted from https://tex.stackexchange.com/a/70884
-%\documentclass[12pt, twoside, openright]{memoir} % print book
-\documentclass[10pt, ebook, openany]{memoir} % ebook
+
+%== PRINT BOOK LAYOUT ================================================
+%\documentclass[12pt, twoside, openright]{memoir}
+%=====================================================================
+
+%== EBOOK LAYOUT =====================================================
+\documentclass[10pt, ebook, openany]{memoir}
+\usepackage[tmargin=2cm,lmargin=1cm,rmargin=1cm,bmargin=2cm]{geometry}
+%=====================================================================
+
 \usepackage[T1]{fontenc}
-\usepackage{tabulary}
+\usepackage[bottom]{footmisc}
+\usepackage{url}
 \usepackage{tgschola}
 \usepackage{../noweb}
 
@@ -72,6 +81,7 @@
 
 This is the introduction.  % TODO: write it, include introduction to chip8 and mercury
 
+\input{system.tex}
 \input{opcodes.tex}
 \input{hello.tex}
 
